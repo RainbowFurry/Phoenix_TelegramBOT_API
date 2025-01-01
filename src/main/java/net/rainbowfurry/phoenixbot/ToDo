@@ -1,0 +1,6 @@
+1. Alles als API bereitstellen und nur testen, da später eigener Bot
+2. Eigenen Bot erstellen anhand von API
+
+Aufgaben:
+Bot Class mit args aufruf, nicht in MAIN
+Get Bot Token form Config
