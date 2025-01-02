@@ -4,3 +4,20 @@
 Aufgaben:
 Bot Class mit args aufruf, nicht in MAIN
 Get Bot Token form Config
+
+Sticker Pack Functions
+
+Try Catch - Send Message because if user trys to sent message to user could run 403 Forbidden. User first needs to interact with Bot
+
+
+            //TelegramBot telegramBot = new TelegramBot("", "");
+            //telegramBot.execute()
+    //execute /executeAsync
+
+
+    //message.setDisableNotification();
+    //message.setAllowSendingWithoutReply();
+    //message.setDisableWebPagePreview();
+    //message.setProtectContent();
+            message.enableHtml();
+            message.enableMarkdown();

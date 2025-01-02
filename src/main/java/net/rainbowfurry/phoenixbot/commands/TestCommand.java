@@ -5,7 +5,7 @@ import net.rainbowfurry.phoenixbot.PhoenixBot;
 public class TestCommand implements Command{
 
     @Override
-    public void run(String clientId, String message) {
-        PhoenixBot.instance.sendMessageToUser(clientId, "TEST TEST TEST");
+    public void command(String channelID, String message) {
+        PhoenixBot.instance.sendMessage(channelID, "TEST TEST TEST");
     }
 }

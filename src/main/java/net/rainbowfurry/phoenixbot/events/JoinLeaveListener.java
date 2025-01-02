@@ -1,8 +1,8 @@
 package net.rainbowfurry.phoenixbot.events;
 
-import net.rainbowfurry.phoenixbot.events.core.ChatEventListener;
+import net.rainbowfurry.phoenixbot.events.core.EventListener;
 
-public class JoinLeaveListener implements ChatEventListener {
+public class JoinLeaveListener implements EventListener {
     @Override
     public void onUserJoin(String chatId) {
         System.out.println("Join chat: " + chatId);
