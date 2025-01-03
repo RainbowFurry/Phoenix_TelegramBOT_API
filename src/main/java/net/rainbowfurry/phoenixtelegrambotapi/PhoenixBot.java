@@ -1,11 +1,12 @@
-package net.rainbowfurry.phoenixbot;
+package net.rainbowfurry.phoenixtelegrambotapi;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.rainbowfurry.phoenixbot.commands.*;
-import net.rainbowfurry.phoenixbot.events.core.EventManager;
+import net.rainbowfurry.phoenixtelegrambotapi.commands.*;
+import net.rainbowfurry.phoenixtelegrambotapi.events.core.EventManager;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.api.methods.StopMessageLiveLocation;
 import org.telegram.telegrambots.meta.api.methods.pinnedmessages.PinChatMessage;
 import org.telegram.telegrambots.meta.api.methods.send.*;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
@@ -110,9 +111,11 @@ public class PhoenixBot extends TelegramLongPollingBot {
     }
 
     private void run(String[] args){
-        try {
-            TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
-            botsApi.registerBot(new PhoenixBot());
+        //try {
+            TelegramBot telegramBot = new TelegramBot(BOT_TOKEN, BOT_NAME);
+
+//            TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
+//            botsApi.registerBot(new PhoenixBot());
 
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 onShutDown();
@@ -130,11 +133,11 @@ public class PhoenixBot extends TelegramLongPollingBot {
 
             //sendMessageToUser(clientID, "Hey Hey!");
             //sendMessageToUser(CHAT_ID, "Bot is online!");
-sendVoice("sa");
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-       //sendMessageToUser(CHAT_ID, "Hallo Hasi");
+
+//        } catch (TelegramApiException e) {
+//            e.printStackTrace();
+//        }
+       //sendMessageToUser("878502184", "Hallo Hasi");
         //sendMessage("1345362239", "Hallo Mama, das ist übrigens ein BOT!");
     }
 
@@ -172,20 +175,78 @@ sendVoice("sa");
         }
     }
 
-    private void sendAudio(){
+    private void sendAudio(String audio){
+
         SendAudio sendAudio = new SendAudio();
+        sendAudio.setChatId("1268155750");
+        sendAudio.setAudio(getInputFile(audio));
+
+        try {
+            execute(sendAudio);
+        } catch (TelegramApiException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void sendLocation(){
+
         SendLocation sendLocation = new SendLocation();
+        sendLocation.setChatId("1268155750");
+        sendLocation.setLatitude(51.001849);
+        sendLocation.setLongitude(7.562811);
+
+        try {
+            execute(sendLocation);
+        } catch (TelegramApiException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private void stopLocation(){
+
+        StopMessageLiveLocation stopMessageLiveLocation = new StopMessageLiveLocation();
+        stopMessageLiveLocation.setChatId("1268155750");
+        stopMessageLiveLocation.setMessageId(1268155750);
+
+        try {
+            execute(stopMessageLiveLocation);
+        } catch (TelegramApiException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void sendContact(){
+
         SendContact sendContact = new SendContact();
+        sendContact.setChatId("1268155750");
+        sendContact.setFirstName("Jasmin");
+        sendContact.setLastName("Hoffmann");
+        sendContact.setPhoneNumber("+49 Test");
+        //sendContact.setProtectContent(true); //message forward not possible
+
+        try {
+            execute(sendContact);
+        } catch (TelegramApiException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
-    private void sendDocument(){
+    private void sendDocument(String document){
+
         SendDocument sendDocument = new SendDocument();
+        sendDocument.setChatId("1268155750");
+        sendDocument.setDocument(getInputFile(document));
+
+        try {
+            execute(sendDocument);
+        } catch (TelegramApiException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void sendSticker(){
@@ -237,7 +298,7 @@ sendVoice("sa");
 
         SendVoice sendVoice = new SendVoice();
         sendVoice.setChatId("1268155750");
-        sendVoice.setVoice(getInpuFile(voice));
+        sendVoice.setVoice(getInputFile(voice));
 
         if(voice.contains(".ogg"))
             sendVoice.setVoice(new InputFile(new File(voice)));
@@ -259,7 +320,7 @@ sendVoice("sa");
         executeAsync(method);
     }
 
-    private InputFile getInpuFile(String inputFile){
+    private InputFile getInputFile(String inputFile){
         if(inputFile.contains("http") || inputFile.contains("."))
             return new InputFile(new File(inputFile));
         else
