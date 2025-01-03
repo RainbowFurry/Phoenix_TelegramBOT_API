@@ -1,6 +1,6 @@
-package net.rainbowfurry.phoenixbot.commands;
+package net.rainbowfurry.phoenixtelegrambotapi.commands;
 
-import net.rainbowfurry.phoenixbot.PhoenixBot;
+import net.rainbowfurry.phoenixtelegrambotapi.PhoenixBot;
 
 public class TestCommand implements Command{
 

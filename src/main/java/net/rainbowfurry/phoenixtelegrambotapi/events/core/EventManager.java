@@ -1,4 +1,4 @@
-package net.rainbowfurry.phoenixbot.events.core;
+package net.rainbowfurry.phoenixtelegrambotapi.events.core;
 
 import java.util.ArrayList;
 import java.util.List;

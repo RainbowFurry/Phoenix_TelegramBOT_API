@@ -1,4 +1,4 @@
-package net.rainbowfurry.phoenixbot.commands;
+package net.rainbowfurry.phoenixtelegrambotapi.commands;
 
 public interface Command {
 

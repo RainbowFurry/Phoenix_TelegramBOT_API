@@ -1,4 +1,4 @@
-package net.rainbowfurry.phoenixbot;
+package net.rainbowfurry.phoenixtelegrambotapi;
 
 public class TextFormatter {
 

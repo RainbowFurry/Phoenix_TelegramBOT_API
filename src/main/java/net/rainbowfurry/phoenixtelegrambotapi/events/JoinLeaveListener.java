@@ -1,6 +1,6 @@
-package net.rainbowfurry.phoenixbot.events;
+package net.rainbowfurry.phoenixtelegrambotapi.events;
 
-import net.rainbowfurry.phoenixbot.events.core.EventListener;
+import net.rainbowfurry.phoenixtelegrambotapi.events.core.EventListener;
 
 public class JoinLeaveListener implements EventListener {
     @Override
