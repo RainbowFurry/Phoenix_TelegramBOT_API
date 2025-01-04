@@ -2,7 +2,10 @@ package net.rainbowfurry.phoenixtelegrambotapi;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import net.rainbowfurry.phoenixtelegrambotapi.commands.BotInfoCommand;
 import net.rainbowfurry.phoenixtelegrambotapi.commands.Command;
+import net.rainbowfurry.phoenixtelegrambotapi.commands.HelpCommand;
+import net.rainbowfurry.phoenixtelegrambotapi.commands.TestCommand;
 import net.rainbowfurry.phoenixtelegrambotapi.events.core.EventManager;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
@@ -21,7 +24,8 @@ public class TelegramBot extends TelegramLongPollingBot {
     private String BOT_NAME = "";
 
     public static Map<String, Command> commands = new HashMap<>();
-    private final EventManager eventManager = new EventManager();
+    public static Map<String, Command> channelCommands = new HashMap<>();
+    public static final EventManager eventManager = new EventManager();
 
     public TelegramBot(String token, String botName) {
         this.bot = this;
@@ -30,11 +34,19 @@ public class TelegramBot extends TelegramLongPollingBot {
         initBot();
     }
 
-    private TelegramBot(String token, String botName, boolean v1){
+    private TelegramBot(String token, String botName, boolean v1) {
         this.bot = this;
         this.BOT_NAME = botName;
         this.BOT_TOKEN = token;
-        //commands.put("wda", new TestCommand());
+
+        // Register Commands
+        commands.put("help", new HelpCommand());
+        commands.put("botinfo", new BotInfoCommand());
+        commands.put("test", new TestCommand());
+
+        if(channelCommands.isEmpty())
+            channelCommands = commands;
+
     }
 
     private void initBot() {
@@ -51,7 +63,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
     }
 
-    private void onShutDown(){
+    private void onShutDown() {
 
     }
 
@@ -60,47 +72,195 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String _update = gson.toJson(update);
-        //System.out.println(_update);
+        System.out.println(_update);
 
         Message message = update.getMessage();
         String _message = gson.toJson(message);
         //System.out.println(_message);
 
         String _chatmember = gson.toJson(update.getMyChatMember());
-        System.out.println(_chatmember);
+        //System.out.println(_chatmember);
 
-        // Check if the update has a message and the message has text
-        if (update.hasMessage() && update.getMessage().hasText()) {
+        // Update
+        eventManager.onUpdate(update);
+
+        // Callbacks
+        if(update.getCallbackQuery() != null){
+            eventManager.onCallBack(update.getCallbackQuery());
+        }
+
+        // Messages and Commands
+        if (update.hasMessage() && update.getMessage().getText() != null) {
+
             String chatId = update.getMessage().getChatId().toString();
             String receivedText = update.getMessage().getText();
 
-            // Command
-            System.out.println(commands.size());
-            if(receivedText.startsWith("/")) {
-                Command command = commands.get(receivedText.replace("/", "").replace("@" + getBotUsername(), ""));
-                if (command != null) {
-                    command.command(chatId, receivedText);
-                } else {
-                    BotMessage.sendMessage(chatId, "Unknown command. Use /help for a list of available commands.");
-                }
-            }
-
             // Event Handling
-//            if (update.getMyChatMember() != null) {
-//                String newStatus = update.getMyChatMember().getNewChatMember().getStatus();
-//                String oldStatus = update.getMyChatMember().getOldChatMember().getStatus();
-//
-//                if ("member".equals(newStatus) && !"member".equals(oldStatus)) {
-//                    // User joined
-//                    eventManager.notifyUserJoin(chatId);
-//                } else if (!"member".equals(newStatus) && "member".equals(oldStatus)) {
-//                    // User left
-//                    eventManager.notifyUserLeave(chatId);
-//                }
-//            }
+            if (update.getMessage().getChatId().equals(update.getMessage().getFrom().getId())) {
+
+                // Command
+                if (receivedText.startsWith("/")) {
+                    Command command = commands.get(receivedText.replace("/", "").replace("@" + getBotUsername(), ""));
+                    if (command != null) {
+                        command.command(chatId, receivedText);
+                        eventManager.onCommand(update.getMessage());
+                    } else {
+                        TextMessage.sendMessage(chatId, "Unknown command. Use /help for a list of available commands.");
+                    }
+                } else {
+                    eventManager.onMessage(update.getMessage());
+                }
+
+                // Audio
+                if (update.getMessage().getAudio() != null) {
+                    eventManager.onAudioMessage(update.getMessage());
+                }
+
+                // Location
+                if (update.getMessage().getLocation() != null) {
+                    eventManager.onLocationMessage(update.getMessage());
+                }
+
+                // Contact
+                if (update.getMessage().getContact() != null) {
+                    eventManager.onContactMessage(update.getMessage());
+                }
+
+                // Document
+                if (update.getMessage().getDocument() != null) {
+                    eventManager.onDocumentMessage(update.getMessage());
+                }
+
+                // Sticker
+                if (update.getMessage().getSticker() != null) {
+                    eventManager.onStickerMessage(update.getMessage());
+                }
+
+                // Photo
+                if (update.getMessage().getPhoto() != null) {
+                    eventManager.onPhotoMessage(update.getMessage());
+                }
+
+                // Video
+                if (update.getMessage().getVideo() != null) {
+                    eventManager.onVideoMessage(update.getMessage());
+                }
+
+                // Voice
+                if (update.getMessage().getVoice() != null) {
+                    eventManager.onVoiceMessage(update.getMessage());
+                }
+
+                // Edit Message
+                if (update.getEditedMessage() != null) {
+                    eventManager.onEditMessage(update.getEditedMessage());
+                }
+
+                // CallBack
+                if(update.getCallbackQuery() != null){
+                    eventManager.onCallBack(update.getCallbackQuery());
+                }
+
+            } else {
+
+                if (receivedText.startsWith("/")) {
+                    Command command = channelCommands.get(receivedText.replace("/", "").replace("@" + getBotUsername(), ""));
+                    if (command != null) {
+                        command.command(chatId, receivedText);
+                        eventManager.onChannelCommand(update.getMessage());
+                    } else {
+                        TextMessage.sendMessage(chatId, "Unknown command. Use /help for a list of available commands.");
+                    }
+                } else {
+                    eventManager.onChannelMessage(update.getMessage());
+                }
+
+                // Update
+                eventManager.onChannelUpdate(update);
+
+                // Audio
+                if (update.getMessage().getAudio() != null) {
+                    eventManager.onChannelAudioMessage(update.getMessage());
+                }
+
+                // Location
+                if (update.getMessage().getLocation() != null) {
+                    eventManager.onChannelLocationMessage(update.getMessage());
+                }
+
+                // Contact
+                if (update.getMessage().getContact() != null) {
+                    eventManager.onChannelContactMessage(update.getMessage());
+                }
+
+                // Document
+                if (update.getMessage().getDocument() != null) {
+                    eventManager.onChannelDocumentMessage(update.getMessage());
+                }
+
+                // Sticker
+                if (update.getMessage().getSticker() != null) {
+                    eventManager.onChannelStickerMessage(update.getMessage());
+                }
+
+                // Photo
+                if (update.getMessage().getPhoto() != null) {
+                    eventManager.onChannelPhotoMessage(update.getMessage());
+                }
+
+                // Video
+                if (update.getMessage().getVideo() != null) {
+                    eventManager.onChannelVideoMessage(update.getMessage());
+                }
+
+                // Voice
+                if (update.getMessage().getVoice() != null) {
+                    eventManager.onChannelVoiceMessage(update.getMessage());
+                }
+
+                // Join Leave
+                if (update.getMyChatMember() != null) {
+                    String newStatus = update.getMyChatMember().getNewChatMember().getStatus();
+                    String oldStatus = update.getMyChatMember().getOldChatMember().getStatus();
+
+                    if (newStatus != null) {
+                        // User joined
+                        eventManager.onChannelJoin(update.getMessage().getFrom(), update.getMessage().getChat());
+                    } else if (oldStatus != null) {
+                        // User left
+                        eventManager.onChannelLeave(update.getMessage().getFrom(), update.getMessage().getChat());
+                    }
+                }
+
+                // Edit Message
+                if (update.getEditedMessage() != null) {
+                    eventManager.onChannelEditMessage(update.getEditedMessage());
+                }
+
+                // CallBack
+                if(update.getCallbackQuery() != null){
+                    eventManager.onChannelCallBack(update.getCallbackQuery());
+                }
+
+            }
 
             System.out.println(chatId + " " + receivedText);
         }
+
+        // Join Leave
+        if (update.getMyChatMember() != null) {
+            String newStatus = update.getMyChatMember().getNewChatMember().getStatus();
+            String oldStatus = update.getMyChatMember().getOldChatMember().getStatus();
+
+            if (newStatus != null) {
+                // User joined
+                eventManager.onJoin(update.getMessage().getFrom(), update.getMessage().getChat());
+            } else if (oldStatus != null) {
+                // User left
+                eventManager.onLeave(update.getMessage().getFrom(), update.getMessage().getChat());
+            }
+        }
+
     }
 
     @Override
