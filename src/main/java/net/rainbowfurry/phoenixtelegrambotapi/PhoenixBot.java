@@ -2,6 +2,8 @@ package net.rainbowfurry.phoenixtelegrambotapi;
 
 import net.rainbowfurry.phoenixtelegrambotapi.commands.*;
 import net.rainbowfurry.phoenixtelegrambotapi.events.core.EventManager;
+import net.rainbowfurry.phoenixtelegrambotapi.manager.ConfigManager;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -10,10 +12,7 @@ public class PhoenixBot {
 
     public static PhoenixBot instance;
     public static TelegramBot telegramBot;
-    private final String BOT_TOKEN = "";
-    private final String BOT_NAME = "";
-    private final String CHAT_ID = "";
-    private final String clientID = "";
+    private ConfigManager configManager;
 
     private final Map<String, Command> commands = new HashMap<>();
     private final EventManager eventManager = new EventManager();
@@ -29,10 +28,20 @@ public class PhoenixBot {
 
     private void run(String[] args){
         //try {
-            telegramBot = new TelegramBot(BOT_TOKEN, BOT_NAME);
 
 //            TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
 //            botsApi.registerBot(new PhoenixBot());
+
+        // Load Config Manager
+        configManager = new ConfigManager();
+
+        // Init Telegram Bot
+        if(configManager.getKey("token") != null && !configManager.getKey("token").equals("YOUR_TOKEN")) {
+            telegramBot = new TelegramBot(configManager.getKey("token"), configManager.getKey("name"));
+        } else {
+            System.out.println("No Bot-Token set up!");
+            System.exit(0);
+        }
 
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 onShutDown();
