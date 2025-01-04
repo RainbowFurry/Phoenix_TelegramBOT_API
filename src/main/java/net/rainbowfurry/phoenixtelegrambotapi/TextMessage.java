@@ -9,7 +9,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.File;
 
-public class BotMessage {
+public class TextMessage {
 
     public static boolean sendMessage(SendMessage message){
         try {
@@ -26,6 +26,9 @@ public class BotMessage {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(text);
+        //message.enableMarkdown(true);
+        //message.enableMarkdownV2(true);
+        message.enableHtml(true);
 
         try {
             TelegramBot.bot.execute(message);
