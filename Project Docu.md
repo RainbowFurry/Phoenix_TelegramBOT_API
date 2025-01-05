@@ -5,6 +5,7 @@
 ![GitHub stars][stars-badge]
 ![GitHub issues][issues-badge]
 ![GitHub release][release-badge]
+<a href="https://discord.gg/39brtBXq"><img src="https://img.shields.io/discord/1309574664141668393?color=5865F2&logo=discord&logoColor=white&style=for-the-badge" alt="Discord server" /></a>
 
 <!--
 [Join our Discord][discord-invite]
