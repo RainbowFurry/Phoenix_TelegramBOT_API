@@ -13,7 +13,7 @@
 
 <div align="center">
 
-[Home](#home) | [Features](#features) | [Installation](#installation) | [Usage](#usage) | [Contributing](#contributing) | [License](#license)
+[Home](https://rainbowfurr.com) | [Features](#features) | [Installation](#installation) | [Usage](#usage) | [Contributing](#contributing) | [License](#license)
 
 ---
 
