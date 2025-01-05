@@ -1,5 +1,6 @@
 
 # Phoenix_TelegramBOT_API
+
 ![GitHub contributors][contributors-badge]
 ![GitHub forks][forks-badge]
 ![GitHub stars][stars-badge]
@@ -7,21 +8,11 @@
 ![GitHub release][release-badge]
 <a href="https://discord.gg/39brtBXq"><img src="https://img.shields.io/discord/1309574664141668393?color=5865F2&logo=discord&logoColor=white&style=for-the-badge" alt="Discord server" /></a>
 
-<!--
-[Join our Discord][discord-invite]
-
-![Project Logo](https://via.placeholder.com/150)  
-*Your tagline or brief description here.*
-
-</div>
-Unlock achievements on Microsoft/Xbox games with ease. This tool is inspired by the functionality of Steam Achievements Manager and is completely free to use.
--->
-
+<br>
 <div align="center">
-
 [Home](https://rainbowfurr.com) | [Features](#features) | [Installation](#installation) | [Usage](#usage) | [Contributing](#contributing) | [License](#license)
-
 </div>
+<br>
 
 ## Table of Contents
 - [AppName](#appname)
