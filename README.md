@@ -10,6 +10,17 @@
 <!--
 [Join our Discord][discord-invite]
 
+
+<div align="center">
+
+[Home](#home) | [Features](#features) | [Installation](#installation) | [Usage](#usage) | [Contributing](#contributing) | [License](#license)
+
+---
+
+![Project Logo](https://via.placeholder.com/150)  
+*Your tagline or brief description here.*
+
+</div>
 Unlock achievements on Microsoft/Xbox games with ease. This tool is inspired by the functionality of Steam Achievements Manager and is completely free to use.
 -->
 
