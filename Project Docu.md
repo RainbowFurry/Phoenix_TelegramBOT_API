@@ -55,16 +55,16 @@ MIT licensed.
 Thanks very much to all of my sponsors.
 
 
-[contributors-badge]: https://img.shields.io/github/contributors/ItsLogic/Xbox-Achievement-Unlocker?style=for-the-badge
-[contributors-url]: https://github.com/ItsLogic/Xbox-Achievement-Unlocker/graphs/contributors
-[forks-badge]: https://img.shields.io/github/forks/ItsLogic/Xbox-Achievement-Unlocker?style=for-the-badge
-[forks-url]: https://github.com/ItsLogic/Xbox-Achievement-Unlocker/network/members
-[stars-badge]: https://img.shields.io/github/stars/ItsLogic/Xbox-Achievement-Unlocker?style=for-the-badge
-[stars-url]: https://github.com/ItsLogic/Xbox-Achievement-Unlocker/stargazers
-[issues-badge]: https://img.shields.io/github/issues/ItsLogic/Xbox-Achievement-Unlocker?style=for-the-badge
-[issues-url]: https://github.com/ItsLogic/Xbox-Achievement-Unlocker/issues
-[release-badge]: https://img.shields.io/github/v/release/ItsLogic/Xbox-Achievement-Unlocker?style=for-the-badge
-[release-url]: https://github.com/ItsLogic/Xbox-Achievement-Unlocker/releases
+[contributors-badge]: https://img.shields.io/github/contributors/RainbowFurry/Phoenix_TelegramBOT_API?style=for-the-badge
+[contributors-url]: https://github.com/RainbowFurry/Phoenix_TelegramBOT_API/graphs/contributors
+[forks-badge]: https://img.shields.io/github/forks/RainbowFurry/Phoenix_TelegramBOT_API?style=for-the-badge
+[forks-url]: https://github.com/RainbowFurry/Phoenix_TelegramBOT_API/network/members
+[stars-badge]: https://img.shields.io/github/stars/RainbowFurry/Phoenix_TelegramBOT_API?style=for-the-badge
+[stars-url]: https://github.com/RainbowFurry/Phoenix_TelegramBOT_API/stargazers
+[issues-badge]: https://img.shields.io/github/issues/RainbowFurry/Phoenix_TelegramBOT_API?style=for-the-badge
+[issues-url]: https://github.com/RainbowFurry/Phoenix_TelegramBOT_API/issues
+[release-badge]: https://img.shields.io/github/v/release/RainbowFurry/Phoenix_TelegramBOT_API?style=for-the-badge
+[release-url]: https://github.com/RainbowFurry/Phoenix_TelegramBOT_API/releases
 [discord-id]: https://img.shields.io/discord/1013602813093359657?logo=discord&style=for-the-badge
 [discord-invite]: https://discord.gg/ugDvSw7cns
 [WPF-Commit]: https://github.com/lepoco/wpfui/tree/c8cd75f6f82414a52a94d2a55fe2a21dd5db83d7
