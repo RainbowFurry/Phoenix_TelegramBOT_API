@@ -332,5 +332,9 @@ public class TextMessage {
             e.printStackTrace();
         }
     }
+
+    private void pinMessage(){
+        //ToDo
+    }
     
 }

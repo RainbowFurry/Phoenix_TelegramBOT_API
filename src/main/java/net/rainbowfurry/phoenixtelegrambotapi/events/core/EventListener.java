@@ -32,6 +32,7 @@ public interface EventListener {
 
     default void onMessageEdit(Message message){}
     default void onChannelMessageEdit(Message message){}
+    //ToDo
     default void onMessageReply(Message message){}
     default void onChannelMessageReply(Message message){}
     default void onMessageShareForward(Message message){}

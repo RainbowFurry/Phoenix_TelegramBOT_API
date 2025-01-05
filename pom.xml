@@ -19,11 +19,11 @@
             <id>phoenix-repo</id>
             <url>https://maven.rainbowfurry.com/snapshots</url>
         </repository>
-        <repository>
-           <id>github</id>
-           <name>Phoenix_TelegramBOT_API by RainbowFurry</name>
-           <url>https://maven.pkg.github.com/RainbowFurry/Phoenix_TelegramBOT_API</url>
-        </repository>
+<!--        <repository>-->
+<!--           <id>github</id>-->
+<!--           <name>GitHub RainbowFurry Apache Maven Packages</name>-->
+<!--           <url>https://maven.pkg.github.com/RainbowFurry/Phoenix_TelegramBOT_API</url>-->
+<!--        </repository>-->
     </distributionManagement>
 
     <dependencies>

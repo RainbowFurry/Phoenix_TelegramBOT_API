@@ -1,5 +1,6 @@
 package net.rainbowfurry.phoenixtelegrambotapi.commands;
 
+import net.rainbowfurry.phoenixtelegrambotapi.TextFormatter;
 import net.rainbowfurry.phoenixtelegrambotapi.TextMessage;
 import net.rainbowfurry.phoenixtelegrambotapi.TelegramBot;
 
@@ -17,7 +18,7 @@ public class HelpCommand implements Command{
         String _message = "A Help List with all valid Bot Commands:\n\n";
 
         for(Map.Entry<String, Command> entry : TelegramBot.commands.entrySet()){
-            _message += "/" + entry.getKey() + " - " + entry.getValue().getCommandDescription() + "\n";
+            _message += "/" + TextFormatter.bold(entry.getKey()) + " - " + entry.getValue().getCommandDescription() + "\n";
         }
 
         TextMessage.sendMessage(channelID, _message);

@@ -14,10 +14,9 @@ public class BotInfoCommand implements Command{
 
         String _message = "The Phoenix Telegram Bot is made by @RainbowFurry and running with Java.\n" +
                 "It is made with oure own API using the Telegram API\n" +
-                "https://docs.rainbowfurry.com/phoenix-telegram-bot-api" +
-                TextFormatter.codePre("TelegramBot telegramBot = new TelegramBot(BOT_TOKEN, BOT_NAME);", "java");
+                "https://docs.rainbowfurry.com/phoenix-telegram-bot-api";
 
-        TextMessage.sendMessage(channelID, message);
+        TextMessage.sendMessage(channelID, _message);
         TextMessage.sendMessage(channelID, TextFormatter.codePre("TelegramBot telegramBot = new TelegramBot(BOT_TOKEN, BOT_NAME);", "java"));
 
     }
