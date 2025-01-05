@@ -10,15 +10,6 @@
 <!--
 [Join our Discord][discord-invite]
 
-
-<div align="center">
-
-[Home](https://rainbowfurr.com) | [Features](#features) | [Installation](#installation) | [Usage](#usage) | [Contributing](#contributing) | [License](#license)
-
-</div>
-
----
-
 ![Project Logo](https://via.placeholder.com/150)  
 *Your tagline or brief description here.*
 
@@ -26,6 +17,11 @@
 Unlock achievements on Microsoft/Xbox games with ease. This tool is inspired by the functionality of Steam Achievements Manager and is completely free to use.
 -->
 
+<div align="center">
+
+[Home](https://rainbowfurr.com) | [Features](#features) | [Installation](#installation) | [Usage](#usage) | [Contributing](#contributing) | [License](#license)
+
+</div>
 
 ## Table of Contents
 - [AppName](#appname)
